@@ -28,7 +28,7 @@ import java.util.Calendar;
 
 /**
  * @version 1.0  02-03-2019
- * @Objective demonstrate the use of AlarmManager and DownloadManager.
+ * @Objective demonstrate the use of AlarmManager TelephonyManager and DownloadManager.
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,Serializable {
     private static final int REQUEST_CODE =1 ;
