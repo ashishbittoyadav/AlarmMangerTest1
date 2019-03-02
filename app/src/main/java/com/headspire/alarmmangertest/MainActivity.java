@@ -1,6 +1,7 @@
 package com.headspire.alarmmangertest;
 
 import android.Manifest;
+import android.Manifest.permission;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -15,8 +16,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -32,6 +35,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TimePicker setTime;
     private Button setAlarm;
     private Button cancel;
+    private Operation operation;
+
+    private Button phoneState;
+
     private AlarmManager alarmManager;
     private Intent alarmIntent;
     private PendingIntent pendingIntent;
@@ -43,33 +50,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTime=findViewById(R.id.set_up_alarm);
         setAlarm=findViewById(R.id.set_alarm);
         cancel=findViewById(R.id.cancel);
+
+
+        phoneState=findViewById(R.id.phone_state);
+        phoneState.setOnClickListener(this);
+        operation=new Operation(this);
+
         cancel.setOnClickListener(this);
         setAlarm.setOnClickListener(this);
         calendar=Calendar.getInstance();
 
-        getPermission();
-    }
-
-    private void getPermission() {
-        if(ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        != PackageManager.PERMISSION_GRANTED)
-        {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this
-            ,Manifest.permission.WRITE_EXTERNAL_STORAGE))
-            {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.INTERNET,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE);
-            }
-            else
-            {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.INTERNET}
-                        ,REQUEST_CODE);
-            }
-        }
-        else
-            return;
+        operation.getPermission();
     }
 
     @Override
@@ -95,6 +86,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(alarmManager!=null)
                     alarmManager.cancel(pendingIntent);
                     Toast.makeText(this,"job cancelled",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.phone_state:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container,new PhoneInformation(operation))
+                        .addToBackStack(null)
+                        .commit();
                 break;
         }
     }
