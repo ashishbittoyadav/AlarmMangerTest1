@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AlarmMangerTest</string>
     <string name="phone_state">phone state</string>
-    <string name="phone_detail">Phone Details:</string>
+    <string name="phone_detail">:Phone Details:</string>
 
 
 </resources>

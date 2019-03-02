@@ -65,8 +65,8 @@ public class Operation {
                 phoneType.append(" NONE");
                 break;
         }
-        phoneInfo.append((R.string.phone_detail));
-        phoneInfo.append("IMEI Number:").append(IMEINumber)
+        phoneInfo.append(context.getResources().getString(R.string.phone_detail));
+        phoneInfo.append("\nIMEI Number:").append(IMEINumber)
                 .append("\nSubscriberID:"+subscriberID)
                 .append("\nSim Serial Number:"+SIMSerialNumber)
                 .append("\nNetwork Country ISO:"+networkCountryISO)
