@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button setAlarm;
     private Button cancel;
     private Operation operation;
-
+    
     private Button phoneState;
 
     private AlarmManager alarmManager;
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTime=findViewById(R.id.set_up_alarm);
         setAlarm=findViewById(R.id.set_alarm);
         cancel=findViewById(R.id.cancel);
-
 
         phoneState=findViewById(R.id.phone_state);
         phoneState.setOnClickListener(this);
